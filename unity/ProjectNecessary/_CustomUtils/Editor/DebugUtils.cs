@@ -8,7 +8,7 @@ using System.Diagnostics;
 /// <summary>
 /// 用于生成新工程的必须文件夹以及导入VSCode
 /// </summary>
-public class MakeNecessaryFolder : Editor {
+public class DebugUtils : Editor {
 
 
 	#region Make Necessary Folders

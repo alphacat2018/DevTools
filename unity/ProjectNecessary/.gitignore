@@ -35,5 +35,4 @@ sysinfo.txt
 
 # VSCode
 /.vscode/
-/Assets/VSCode/
-/Assets/VSCode.meta
+/Assets/_CustomUtils/
