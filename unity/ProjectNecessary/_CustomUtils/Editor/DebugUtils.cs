@@ -49,16 +49,6 @@ public class DebugUtils : Editor {
 
 	#region Import VSCode
 
-	[MenuItem ("Utils/Import VSCode %#v")]
-	public static void ImportVSCode () {
-		string path = Application.dataPath + Path.DirectorySeparatorChar + "VSCode";
-		string originalPath = "/Users/oyyming/DevTools/unity/ProjectNecessary/VSCode/";
-		if (AssetDatabase.IsValidFolder (path))
-			return;
-		FileUtil.CopyFileOrDirectory (originalPath, path);
-		AssetDatabase.Refresh ();
-	}
-
 	#endregion
 
 	#region Open File In Finder
@@ -86,4 +76,57 @@ public class DebugUtils : Editor {
 		EditorSceneManager.SaveScene (EditorSceneManager.GetActiveScene (), Application.dataPath + Path.DirectorySeparatorChar + "Scenes" + Path.DirectorySeparatorChar + "Main.unity");
 	}
 
+	[MenuItem ("Utils/Open In Finder  %#d")]
+	public static void AdjustDepth () {
+		if (Selection.activeGameObject == null) {
+			return;
+		}
+
+		UIPanel panel = Selection.activeGameObject.GetComponentInParent<UIPanel> ();
+		int depth = 10;
+		if (panel != null) {
+			// Adjust Panel
+			UIPanel[] panels = panel.GetComponentsInChildren<UIPanel> ();
+			IEnumerator enumerator = panels.GetEnumerator ();
+			while (enumerator.MoveNext ()) {
+				UIPanel childPanel = enumerator.Current as UIPanel;
+				childPanel.depth = depth++;
+				childPanel.sortingOrder = childPanel.depth;
+			}
+
+			UIWidget[] widgets = panel.GetComponentsInChildren<UIWidget> ();
+			enumerator = widgets.GetEnumerator ();
+			while (enumerator.MoveNext ()) {
+				UIWidget widget = enumerator.Current as UIWidget;
+				widget.depth = depth++;
+			}
+		}
+	}
+
+	[MenuItem ("Utils/Move GameObject Up In Siblings &UP")]
+	public static bool MoveUpSibling () {
+		if (Selection.activeGameObject == null) {
+			return false;
+		}
+
+		int siblingIndex = Selection.activeGameObject.transform.GetSiblingIndex ();
+		if (siblingIndex > 0) {
+			Selection.activeGameObject.transform.SetSiblingIndex (siblingIndex - 1);
+			return true;
+		}
+
+		return false;
+	}
+
+	[MenuItem ("Utils/Move GameObject Down In Siblings &DOWN")]
+	public static bool MoveDownSibling () {
+		if (Selection.activeGameObject == null) {
+			return false;
+		}
+
+		int siblingIndex = Selection.activeGameObject.transform.GetSiblingIndex ();
+		Selection.activeGameObject.transform.SetSiblingIndex (siblingIndex + 1);
+
+		return false;
+	}
 }
