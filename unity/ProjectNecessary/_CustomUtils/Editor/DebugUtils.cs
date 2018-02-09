@@ -181,11 +181,8 @@ public class DebugUtils : Editor
             {   // Root GameObject
                 GameObject[] rootGameObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
                 Transform parentSiblingTransform = rootGameObjects[siblingIndex - 1].transform;
-                Transform[] parentSiblingChildren = parentSiblingTransform.GetComponentsInChildren<Transform>();
-                if (parentSiblingChildren != null)
-                {
-                    Transform parentSiblingLastChildTransform = parentSiblingChildren[parentSiblingChildren.Length - 1];
-                    transform.parent = parentSiblingLastChildTransform;
+                if (parentSiblingTransform != null) {
+                    transform.parent = parentSiblingTransform;
                     transform.Reset();
 					EditorGUIUtility.PingObject(Selection.activeGameObject);
                 }
@@ -265,6 +262,24 @@ public class DebugUtils : Editor
         }
 
         return false;
+    }
+
+    [MenuItem("Utils/Move GameObject Down To Parent Siblings &1")]
+    public static void SetRelativeAnchor()
+    {
+        GameObject obj = Selection.activeGameObject;
+        if (obj == null)
+        {
+            return;
+        }
+
+        UIAnchor anchor = obj.GetComponent<UIAnchor>();
+		if (anchor.transform.parent != null && anchor.transform.parent.GetComponent<UITexture>() != null) {
+        	UITexture parent = anchor.transform.parent.GetComponent<UITexture>();
+            int width = parent.width;
+            int height = parent.height;
+            anchor.relativeOffset = new Vector2 (anchor.transform.localPosition.x / parent.width, anchor.transform.localPosition.y / parent.height);
+        }
     }
 
 }
