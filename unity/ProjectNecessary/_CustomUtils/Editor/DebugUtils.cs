@@ -87,6 +87,7 @@ public class DebugUtils : Editor
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), Application.dataPath + Path.DirectorySeparatorChar + "Scenes" + Path.DirectorySeparatorChar + "Main.unity");
     }
 
+#if NGUI
     [MenuItem("Utils/Open In Finder  %#d")]
     public static void AdjustDepth()
     {
@@ -118,6 +119,7 @@ public class DebugUtils : Editor
             }
         }
     }
+#endif
 
     [MenuItem("Utils/Move GameObject Up Between Siblings &%UP")]
     public static bool MoveUpSibling()
@@ -264,22 +266,12 @@ public class DebugUtils : Editor
         return false;
     }
 
-    [MenuItem("Utils/Move GameObject Down To Parent Siblings &1")]
-    public static void SetRelativeAnchor()
-    {
-        GameObject obj = Selection.activeGameObject;
-        if (obj == null)
-        {
-            return;
-        }
+}
 
-        UIAnchor anchor = obj.GetComponent<UIAnchor>();
-		if (anchor.transform.parent != null && anchor.transform.parent.GetComponent<UITexture>() != null) {
-        	UITexture parent = anchor.transform.parent.GetComponent<UITexture>();
-            int width = parent.width;
-            int height = parent.height;
-            anchor.relativeOffset = new Vector2 (anchor.transform.localPosition.x / parent.width, anchor.transform.localPosition.y / parent.height);
-        }
+public static class TransformExtension {
+    public static void Reset (this Transform transform) {
+        transform.localPosition = Vector3.one;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
     }
-
 }
