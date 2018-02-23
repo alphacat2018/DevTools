@@ -249,5 +249,15 @@
     {
         "key": "alt+cmd+f",
         "command": "-editor.action.startFindReplaceAction"
+    },
+    { 
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.focus",
+        "when": "!terminalFocus"
     }
 ]
