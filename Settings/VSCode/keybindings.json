@@ -163,10 +163,6 @@
         "command": "-workbench.action.reopenClosedEditor"
     },
     {
-        "key": "shift+cmd+t",
-        "command": "workbench.action.openPreviousRecentlyUsedEditor"
-    },
-    {
         "key": "ctrl+r",
         "command": "-workbench.action.openRecent"
     },
@@ -259,5 +255,17 @@
         "key": "ctrl+`",
         "command": "workbench.action.terminal.focus",
         "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+1",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "shift+cmd+t",
+        "command": "workbench.action.replaceInFiles"
+    },
+    {
+        "key": "shift+cmd+h",
+        "command": "-workbench.action.replaceInFiles"
     }
 ]
