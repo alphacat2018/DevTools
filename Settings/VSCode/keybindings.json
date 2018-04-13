@@ -284,5 +284,15 @@
     {
         "key": "ctrl+shift+`",
         "command": "-workbench.action.terminal.new"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "typescriptHero.index.addImportUnderCursor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "-typescriptHero.index.addImportUnderCursor",
+        "when": "editorTextFocus"
     }
 ]
