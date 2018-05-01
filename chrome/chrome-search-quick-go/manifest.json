@@ -6,7 +6,8 @@
     "content_scripts": [{
         "matches": [
             "*://*/search*",
-            "*://www.baidu.com/*"
+            "*://www.baidu.com/*",
+            "*://*/*"
         ],
         "js": ["keymaster.js", "extension.js", "main.js"],
         "css": ["search_results.css"],
@@ -17,6 +18,7 @@
     "permissions": [
         "*://*/search*",
         "*://www.baidu.com/*",
+        "*://*/*",
         "storage"
     ],
     "options_ui": {
