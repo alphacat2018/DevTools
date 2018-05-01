@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Options for Enhanced keyboard navigation in Google Search</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="option">
+        <label for="wrap-navigation">
+            <input type="checkbox" id="wrap-navigation"> Wrap around when navigating before/after the first/last search result
+        </label>
+    </div>
+    <div class="option">
+        <label for="auto-select-first">
+            <input type="checkbox" id="auto-select-first"> Focus on first search result automatically after the page loads
+        </label>
+    </div>
+    <div id="keybindings-container">
+        <h3>Keybindings</h3>
+        <div id="keybindings-help">
+            All keybindings should be specified in
+            <a href="https://github.com/madrobby/keymaster" target="_blank">Keymaster</a> format. Examples:
+            <ul>
+                <li>
+                    <kbd class="keybinding">a</kbd>
+                </li>
+                <li>
+                    <kbd class="keybinding">ctrl+a</kbd>
+                </li>
+                <li>
+                    <kbd class="keybinding">command+a</kbd>
+                </li>
+                <li>
+                    <kbd class="keybinding">a, ctrl+b, command+c</kbd> - multiple shortcuts that will be treated equivalently</li>
+            </ul>
+            Special keys names: backspace, tab, clear, enter, return, esc, escape, space, up, down, left, right, home, end, pageup, pagedown,
+            del, delete, and f1 through f19. In order to disable a keybinding, delete its keybinding in the textbox.
+        </div>
+        <div class="option">
+            <label for="next-key" class="option-desc">Next search result</label>
+            <input id="next-key" class="input-keybinding" type="text" value="down, j">
+        </div>
+        <div class="option">
+            <label for="previous-key" class="option-desc">Previous search result</label>
+            <input id="previous-key" class="input-keybinding" type="text" value="up, k">
+        </div>
+        <div class="option">
+            <label for="navigate-new-tab-background-key" class="option-desc">Open in a new background tab</label>
+            <input id="navigate-new-tab-background-key" class="input-keybinding" type="text" value="ctrl+shift+return, command+shift+return, ctrl+shift+space">
+        </div>
+        <div class="option">
+            <label for="navigate-new-tab-key" class="option-desc">Open in a new window/tab</label>
+            <input id="navigate-new-tab-key" class="input-keybinding" type="text" value="ctrl+return, command+return, ctrl+space">
+        </div>
+    </div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="extension.js"></script>
+    <script src="options.js"></script>
+</body>
+
+</html>

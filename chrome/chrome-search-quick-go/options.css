@@ -1,0 +1,22 @@
+body {
+  width: 400px;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+.input-keybinding {
+  position: absolute;
+  left: 220px;
+  width: 100px;
+}
+
+.option-desc {
+  display: inline-block;
+  width: 200px;
+}
+
+#status {
+  font-weight: bold;
+}

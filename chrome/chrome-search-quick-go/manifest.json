@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "Chrome Search Quick Go",
+    "version": "1.0.0",
+    "description": "Adds shortcuts to Google, Baidu and Bing Search Result.",
+    "content_scripts": [{
+        "matches": [
+            "*://*/search*",
+            "*://www.baidu.com/*"
+        ],
+        "js": ["keymaster.js", "extension.js", "main.js"],
+        "css": ["search_results.css"],
+        "run_at": "document_idle"
+    }],
+    "background": {
+    },
+    "permissions": [
+        "*://*/search*",
+        "*://www.baidu.com/*",
+        "storage"
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
+    "icons": {
+        "128": "icon200.png"
+    }
+}
