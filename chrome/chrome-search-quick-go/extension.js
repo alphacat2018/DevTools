@@ -34,6 +34,26 @@ const extension = {
   },
 
   init() {
+    window.addEventListener('keyup', e => {
+      // if something else took care of this event or if the target of
+      // the event is an input field then just ignore it
+      if (e.defaultPrevented) {
+        return;
+      }
+
+      if (e.code === "KeyS" && e.altKey) {
+        this.tryFocusInput(e);
+      }else if (e.key === 'Alt') {
+        this._waitingKeyS = true
+        setTimeout(() => {
+          this._waitingKeyS = false
+        }, 300)
+      } else if (e.key === "s" && this._waitingKeyS) {
+        this.tryFocusInput(e);
+      }
+    }, false);
+
+
     this.searcher = null
     Object.keys(this.hostToSearcher).forEach(key => {
       if (window.location.hostname.includes(key)) {
@@ -45,6 +65,16 @@ const extension = {
       return;
 
     this.insertQuickNavigationIfNecessary()
+  },
+
+  tryFocusInput(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var input = findAppropriateField();
+    console.warn ("input", input)
+    if (input)
+      input.focus();
   },
 
   insertQuickNavigationIfNecessary() {
@@ -110,7 +140,7 @@ const extension = {
     });
     this.register(options.navigateNewTabBackgroundKey, () => {
       const link = results.items[results.focusedIndex];
-      chrome.tabs.create({url : link.anchor.href}, false)
+      chrome.tabs.create({ url: link.anchor.href }, false)
     });
   },
 
@@ -316,4 +346,23 @@ function getElementByXpath(path) {
 function hasHighlightElement() {
   var element = document.querySelector('.highlighted-search-result')
   return element
+}
+
+
+function findAppropriateField() {
+  var sel = document.querySelector(
+    // these are sane versions of what search field is named
+    'input[id=search], input[name=search],' +
+    'input[id*=search], input[name*=search],' +
+    'input[class*=search],' +
+    // and these are purely empirical
+    'input[name=q], [id*=search] input[type=text], [id*=search] input[type=search],' +
+    '[id=lst-ib] input'
+  );
+
+  if (!sel) {
+    sel = document.querySelector ("input")
+  }
+
+  return sel
 }
